@@ -7,7 +7,6 @@ body {
 }
 
 .code_block {
-    border: 1px solid black;
-    padding: 0px;
+    border: 1px solid grey;
     font-family: monospace;
 }

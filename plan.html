@@ -52,25 +52,25 @@
 <br># This will be used to validate input, as well as creating the text content for the the divs
 <br># Note: I originally had this function checking for divide by 0 errors, but it seems javascript is totally cool with it
 <br>def evaluateInputs(numeric1, numeric2, operation): --> Returns a tuple, string with result or error message, along with boolean if operation was successful
-<br><br># Bad inputs
-<br>if numeric1 is null or numeric2 is null:
-<br>return ("Error! One of more Operands are missing", false)
-<br>if numeric1 is not numeric or numeric2 is not numeric:
-<br>return ("Error! One or or more Operands are not valid inputs - you dirty hacker")
-<br><br># Inputs are good
-<br>result = eval(numeric1, operation, numeric2)
-<br>return (f"{numeric1} {operation} {numeric2} = {result}", true)
+<br><br>&emsp;&emsp;    # Bad inputs
+<br>&emsp;&emsp;    if numeric1 is null or numeric2 is null:
+<br>&emsp;&emsp;&emsp;&emsp;        return ("Error! One of more Operands are missing", false)
+<br>&emsp;&emsp;    if numeric1 is not numeric or numeric2 is not numeric:
+<br>&emsp;&emsp;&emsp;&emsp;        return ("Error! One or or more Operands are not valid inputs - you dirty hacker")
+<br><br>&emsp;&emsp;    # Inputs are good
+<br>&emsp;&emsp;    result = eval(numeric1, operation, numeric2)
+<br>&emsp;&emsp;    return (f"{numeric1} {operation} {numeric2} = {result}", true)
 <br><br><br># values are the same as evaluateInputs, but the color is the color they selected with the input
 <br># Used for actually creating the divs, creates the correct color as well
 <br>def createOutput(numeric1, numeric2, operation, color): --> Creates and returns a div with the proper form
-<br><br>output = div() # Create a div, obviously this will be javascript rather than python in implementation
-<br><br>outputText, valid = evaluateInputs(numeric1, numeric2, operation)
-<br><br>output.text = f"{currentTime} {outputText}"
-<br>if valid:
-<br>output.color = color
-<br>else:
-<br><br>output.color = red
-<br><br>return output
+<br>&emsp;&emsp;	output = div() # Create a div, obviously this will be javascript rather than python in implementation
+<br>&emsp;&emsp;	outputText, valid = evaluateInputs(numeric1, numeric2, operation)
+<br>&emsp;&emsp;	output.text = f"{currentTime} {outputText}"
+<br>&emsp;&emsp;	if valid:
+<br>&emsp;&emsp;&emsp;&emsp;		output.color = color
+<br>&emsp;&emsp;	else:
+<br>&emsp;&emsp;&emsp;&emsp;		output.color = red
+<br>&emsp;&emsp;	return output
 <br><br></code></div><p>Good and bad inputs are handled by the functions, including if the user does some hackery with changing the input types.
 </p><p>Created a separate html file for getting the designs down, to reference later
 </p><h1> Phase 3: Implementation (15%)

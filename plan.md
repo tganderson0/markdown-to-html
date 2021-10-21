@@ -84,18 +84,13 @@ def evaluateInputs(numeric1, numeric2, operation): --> Returns a tuple, string w
 # values are the same as evaluateInputs, but the color is the color they selected with the input
 # Used for actually creating the divs, creates the correct color as well
 def createOutput(numeric1, numeric2, operation, color): --> Creates and returns a div with the proper form
-	
 	output = div() # Create a div, obviously this will be javascript rather than python in implementation
-	
 	outputText, valid = evaluateInputs(numeric1, numeric2, operation)
-	
 	output.text = f"{currentTime} {outputText}"
 	if valid:
 		output.color = color
 	else:
-	
 		output.color = red
-	
 	return output
 
 

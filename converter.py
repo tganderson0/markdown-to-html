@@ -1,13 +1,20 @@
 import sys
 import re
-
-
+from os.path import exists
+from os import getcwd
 
 def main():
     new_page = HTML_START + getMarkdownString(sys.argv[1]) + HTML_END
 
     # This means a save file was given
     if len(sys.argv) == 3:
+        if exists(sys.argv[2]):
+            choice = input(f"\033[31m Warning: {sys.argv[2]} already exists. Overwrite? (y/n):\033[0m ").lower()
+            if not re.search("y", choice):
+                print("Exiting")
+                exit()
+            else:
+                print("Overwriting")
         with open(sys.argv[2], "w+") as output_file:
             output_file.write(new_page)
         print("\033[32m" + f"Saved file to {sys.argv[2]}" + "\033[0m")
@@ -28,12 +35,10 @@ def getMarkdownString(filename):
     output = ""
     in_code_block = False
     
-    for index, line in enumerate(all_lines):
+    for index, original_line in enumerate(all_lines):
         
-        # Saving original line for code blocks
-        original_line = line
         # Strip leading whitespace
-        line = line.lstrip()
+        line = original_line.lstrip()
         if len(line) == 0:
             if in_code_block:
                 output += '<br>'
@@ -49,7 +54,12 @@ def getMarkdownString(filename):
         
         # If we are in a code block just add whatever is there
         elif in_code_block:
-            output += f"<br>{line}"
+            output += "<br>"
+            num_of_tabs = len(re.findall(DEFAULT_TAB, original_line))
+            num_of_tabs += len(re.findall('\t', original_line))
+            for i in range(num_of_tabs):
+                output += "&emsp;&emsp;"
+            output += f"{original_line}"
 
         # Check for headers
         elif line[0] == '#' and not in_code_block:
@@ -125,6 +135,7 @@ HTML_END = """
 </html>
 """
 
+# CSS that is generated
 AUTO_CSS = """
 
 body {
@@ -134,18 +145,33 @@ body {
 }
 
 .code_block {
-    border: 1px solid black;
-    padding: 0px;
+    border: 1px solid grey;
     font-family: monospace;
 }
 """
 
+# Default tab size (change this to match your preferred size)
+DEFAULT_TAB = "    "
+
+
+#######################################
+# End Constants
+#######################################
+
+def usage():
+    print("Usage: converter.py \033[32m <MARKDOWN_FILENAME> \033[35m <DESTINATION_FILENAME (optional, prints to console if not supplied)> \033[0m")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("No files were specified")
+        usage()
         exit()
-    css_choice = input("Would you like to generate a css file? (y/n)").lower()
+
+    print("\033[36m" + f"Creating HTML file from {sys.argv[1]}" + "\033[0m")
+    if not exists(sys.argv[1]):
+        print(f"\033[31m Could not find {getcwd()}/{sys.argv[1]} \033[0m")
+        exit()
+    css_choice = input("Would you like to generate a css file? (y/n): ").lower()
+    print()
     if re.search("y", css_choice):
         with open("autostyle.css", "w+") as css:
             css.write(AUTO_CSS)
@@ -153,5 +179,4 @@ if __name__ == "__main__":
     else:
         print("\033[31m" + "Will not create CSS" + "\033[0m")
 
-    print("\n" + "\033[36m" + f"Creating HTML file from {sys.argv[1]}" + "\033[0m")
     main()
