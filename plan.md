@@ -14,9 +14,13 @@ I will be writing a calculator using vanilla javascript, adding all elements sol
         4. *
         5. %
         6. **
+   
+ 
     * Input for color lets user pick the output div's color
     * Button with label 'compute', which will then evaluate input and output a new div below the input interface (NOTE: color will be taken from input) Should verify input before evaluating
+
 3. Newest output should be at the TOP, pushing the older ones downward
+
 
 ### Output format
 
@@ -25,10 +29,10 @@ I will be writing a calculator using vanilla javascript, adding all elements sol
 * Red output div if there is an error, place error message
 * Color should be what was picked if operation was successful
 
+
 ### What I know and what I will need to learn
 
 * Already know how to create elements through javascript, the main one I will need to look into is telling which div was clicked, but if memory serves me right, there is some form of click listener that I can use
-
 * Will need to review how to use the 'color' input
 
 
@@ -46,11 +50,13 @@ I will be writing a calculator using vanilla javascript, adding all elements sol
 7. Current time of browser (from js)
 
 
+
 ### Outputs
 
 1. New div according to design (red for error, their color for other)
 2. Removal of a output div if clicked
 3. No formulae, can just use eval()
+
 
 # Phase 2: Design (30%)
 Deliver:
@@ -110,20 +116,28 @@ I realized that the plan could have gone a bit better with the functions, I did 
 
 1. Empty input box on one or both should create a red error output
 	* PASSED
+
 2. Extra test, if user changes input type to non-numeric, and enters a non-numeric value, should output red error
 	* PASSED
+
 3. Output box should match color input
 	* PASSED
+
 4. Output order should be newest to oldest
 	* PASSED
+
 5. Output should be removed when clicked, and the correct one should be removed
 	* PASSED
+
 6. Proper output for each selection (perform each operation on a set of numbers, should match expected output)
 	* PASSED
+
 7. Testing one and both negative outputs expected number
 	* PASSED
+
 8. Testing one and both very small numbers gives expected output
 	* PASSED
+
 9. Testing one and both very large numbers gives expected output
 	* PASSED
 

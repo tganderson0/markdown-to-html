@@ -1,13 +1,11 @@
 
 <!DOCTYPE html>
 
-<!-- Changes you make to this file will not be reviewed by the grader -->
-
 <html lang="en">
 	<head>
 		<title>My Markdown</title>
 		<meta charset="utf-8">
-		<link href="style.css" rel="stylesheet">
+		<link href="autostyle.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -15,17 +13,17 @@
 </h1><p>I will be writing a calculator using vanilla javascript, adding all elements solely through javascript and not using an html document. (Other than the most basic valid page that I can)
 </p><ol><li> Title of page should be changed by the script upon load
 </li><li> Div will contain instructions to create an expression, as well as inputs for creating one
-</li></ol><ul><li> Numeric inputs for binary arithmetic operations (has a placeholder value to begin)
+</li><ul><li> Numeric inputs for binary arithmetic operations (has a placeholder value to begin)
 </li><li> Drop down menu to select operation to perform
-</li></ul><ol><li> +
+</li><ol><li> +
 </li><li> -
 </li><li> /
 </li><li> *
 </li><li> %
 </li><li> **
-</li></ol><ul><li> Input for color lets user pick the output div's color
+</li></ol></ul><ul><li> Input for color lets user pick the output div's color
 </li><li> Button with label 'compute', which will then evaluate input and output a new div below the input interface (NOTE: color will be taken from input) Should verify input before evaluating
-</li></ul><ol><li> Newest output should be at the TOP, pushing the older ones downward
+</li></ul><li> Newest output should be at the TOP, pushing the older ones downward
 </li></ol><h3> Output format
 </h3><ul><li> String representation of the current time of evaluation, regardless of operation success
 </li><li> Output div should be REMOVED when CLICKED
@@ -33,7 +31,7 @@
 </li><li> Color should be what was picked if operation was successful
 </li></ul><h3> What I know and what I will need to learn
 </h3><ul><li> Already know how to create elements through javascript, the main one I will need to look into is telling which div was clicked, but if memory serves me right, there is some form of click listener that I can use
-</li></ul><ul><li> Will need to review how to use the 'color' input
+</li><li> Will need to review how to use the 'color' input
 </li></ul><h1> Phase 1: System Analysis (10%)
 </h1><h3> Inputs
 </h3><ol><li> Inputted numeric value 1 (numeric input)
@@ -50,56 +48,54 @@
 </li></ol><h1> Phase 2: Design (30%)
 </h1><p>Deliver:
 </p><p>(Pseudocode in python-ish)
-</p><p>```
-</p><h1> numericX is the input sliders, operation is the currently selected operation
-</h1><h1> This will be used to validate input, as well as creating the text content for the the divs
-</h1><h1> Note: I originally had this function checking for divide by 0 errors, but it seems javascript is totally cool with it
-</h1><p>def evaluateInputs(numeric1, numeric2, operation): --> Returns a tuple, string with result or error message, along with boolean if operation was successful
-</p><h1> Bad inputs
-</h1><p>if numeric1 is null or numeric2 is null:
-</p><p>return ("Error! One of more Operands are missing", false)
-</p><p>if numeric1 is not numeric or numeric2 is not numeric:
-</p><p>return ("Error! One or or more Operands are not valid inputs - you dirty hacker")
-</p><h1> Inputs are good
-</h1><p>result = eval(numeric1, operation, numeric2)
-</p><p>return (f"{numeric1} {operation} {numeric2} = {result}", true)
-</p><h1> values are the same as evaluateInputs, but the color is the color they selected with the input
-</h1><h1> Used for actually creating the divs, creates the correct color as well
-</h1><p>def createOutput(numeric1, numeric2, operation, color): --> Creates and returns a div with the proper form
-</p><p>output = div() # Create a div, obviously this will be javascript rather than python in implementation
-</p><p>outputText, valid = evaluateInputs(numeric1, numeric2, operation)
-</p><p>output.text = f"{currentTime} {outputText}"
-</p><p>if valid:
-</p><p>output.color = color
-</p><p>else:
-</p><p>output.color = red
-</p><p>return output
-</p><p>```
-</p><p>Good and bad inputs are handled by the functions, including if the user does some hackery with changing the input types.
+</p><div class="code_block"><code><br># numericX is the input sliders, operation is the currently selected operation
+<br># This will be used to validate input, as well as creating the text content for the the divs
+<br># Note: I originally had this function checking for divide by 0 errors, but it seems javascript is totally cool with it
+<br>def evaluateInputs(numeric1, numeric2, operation): --> Returns a tuple, string with result or error message, along with boolean if operation was successful
+<br><br># Bad inputs
+<br>if numeric1 is null or numeric2 is null:
+<br>return ("Error! One of more Operands are missing", false)
+<br>if numeric1 is not numeric or numeric2 is not numeric:
+<br>return ("Error! One or or more Operands are not valid inputs - you dirty hacker")
+<br><br># Inputs are good
+<br>result = eval(numeric1, operation, numeric2)
+<br>return (f"{numeric1} {operation} {numeric2} = {result}", true)
+<br><br><br># values are the same as evaluateInputs, but the color is the color they selected with the input
+<br># Used for actually creating the divs, creates the correct color as well
+<br>def createOutput(numeric1, numeric2, operation, color): --> Creates and returns a div with the proper form
+<br><br>output = div() # Create a div, obviously this will be javascript rather than python in implementation
+<br><br>outputText, valid = evaluateInputs(numeric1, numeric2, operation)
+<br><br>output.text = f"{currentTime} {outputText}"
+<br>if valid:
+<br>output.color = color
+<br>else:
+<br><br>output.color = red
+<br><br>return output
+<br><br></code></div><p>Good and bad inputs are handled by the functions, including if the user does some hackery with changing the input types.
 </p><p>Created a separate html file for getting the designs down, to reference later
 </p><h1> Phase 3: Implementation (15%)
 </h1><p>I realized that the plan could have gone a bit better with the functions, I did not think about the click listeners. I ended up creating 2 extra functions, that pretty much just added the original input, as well as a single output box.
 </p><h1> Phase 4: Testing & Debugging (30%)
 </h1><h2> Tested
 </h2><ol><li> Empty input box on one or both should create a red error output
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Extra test, if user changes input type to non-numeric, and enters a non-numeric value, should output red error
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Output box should match color input
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Output order should be newest to oldest
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Output should be removed when clicked, and the correct one should be removed
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Proper output for each selection (perform each operation on a set of numbers, should match expected output)
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Testing one and both negative outputs expected number
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Testing one and both very small numbers gives expected output
-</li></ol><ul><li> PASSED
-</li></ul><ol><li> Testing one and both very large numbers gives expected output
-</li></ol><ul><li> PASSED
-</li></ul><h1> Phase 5: Deployment (5%)
+</li><ul><li> PASSED
+</li></ul><li> Extra test, if user changes input type to non-numeric, and enters a non-numeric value, should output red error
+</li><ul><li> PASSED
+</li></ul><li> Output box should match color input
+</li><ul><li> PASSED
+</li></ul><li> Output order should be newest to oldest
+</li><ul><li> PASSED
+</li></ul><li> Output should be removed when clicked, and the correct one should be removed
+</li><ul><li> PASSED
+</li></ul><li> Proper output for each selection (perform each operation on a set of numbers, should match expected output)
+</li><ul><li> PASSED
+</li></ul><li> Testing one and both negative outputs expected number
+</li><ul><li> PASSED
+</li></ul><li> Testing one and both very small numbers gives expected output
+</li><ul><li> PASSED
+</li></ul><li> Testing one and both very large numbers gives expected output
+</li><ul><li> PASSED
+</li></ul></ol><h1> Phase 5: Deployment (5%)
 </h1><p>Deliver:
 </p><ul><li> Your repository pushed to GitLab.
 </li></ul><h1> Phase 6: Maintenance
@@ -111,11 +107,11 @@
 </li></ul><ul><li> If a bug is reported in a few months, how long would it take you to find the cause?
 </li><li> Bugs should be really quick to find, as it is a very short and simple program. Not a large amount of connected parts
 </li></ul><ul><li> Will your documentation make sense to
-</li></ul><p>anybody besides yourself?
+</li><p>anybody besides yourself?
 </p><ul><li> The documentation needs a bit of work to be better understood by other people, I plan on going back and making it better after I finish answering these questions.
 </li></ul><ul><li> How easy will it be to add a new feature to this program in a year?
 </li><li> New features would be really easy to add, as I feel I separated the sections out approriately. The setup function handles adding original parts to the page on load, everything else is just a function to create an element
-</li></ul><ul><li> Will your program continue to work after upgrading your computer’s hardware? the operating system? to the next version of Python?
+</li></ul></ul><ul><li> Will your program continue to work after upgrading your computer’s hardware? the operating system? to the next version of Python?
 </li><li> Since this is javascript running in my browser, my computer's hardware and the operating system would not have an effect on my program. I don't take advantage of anything specific to a computer either. For the next version of javascript, it should be fine, since I did not use any deprecated functions, although I can't gurantee that my work will last forever, just at least to the next version
 </li></ul>
 	</body>
