@@ -21,3 +21,5 @@ And a message will show.
 ## Note
 
 This is not perfect. Particularly, with nested unordered lists, it will get some wonky output. You will most likely have to fix those yourself afterwards
+
+In addition, while the output is a completely valid html page, it definitely will not be beautiful to look at as source code.
